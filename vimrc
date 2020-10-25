@@ -37,6 +37,8 @@ let g:airline_symbols.linenr = ''
 
 autocmd vimenter * NERDTree
 
+set vb
+
 " Hack to work key arrows in vim in tmux
 if &term =~ '^screen'
     " tmux will send xterm-style keys when its xterm-keys option is on

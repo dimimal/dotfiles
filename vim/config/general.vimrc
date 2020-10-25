@@ -1,3 +1,5 @@
+set encoding=UTF-8
+
 " no vi-compatible
 set nocompatible
 

@@ -1,4 +1,3 @@
-" map leader
 let mapleader = ","
 
 " bind nohl
@@ -16,10 +15,10 @@ vnoremap <F2> <C-C>:update<CR>
 inoremap <F2> <C-O>:update<CR>
 
 " Hack to make arrows work in insert mode
-map <ESC>oA <ESC>ki
-imap <ESC>oB <ESC>ji
-imap <ESC>oC <ESC>li
-imap <ESC>oD <ESC>hi
+" map <ESC>oA <ESC>ki
+" imap <ESC>oB <ESC>ji
+" imap <ESC>oC <ESC>li
+" imap <ESC>oD <ESC>hi
 
 " Maps for copy paste vim to clipboard
 vnoremap <C-c> "+y

@@ -5,17 +5,22 @@ filetype plugin indent on	" load filetype-specific indent files
 " set t_Co=256
 let g:gruvbox_italic=0
 colorscheme gruvbox 
+" colorscheme onedark 
 set background=dark
-let g:airline_theme='angr'
+" let g:airline_theme='angr'
 let g:gruvbox_contrast_dark='medium'
+
+"JEDI-VIM remove automatically the pop up preview window
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 " JS syntastic fix
-let g:jsx_ext_required = 0 " Allow JSX in normal JS files
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " Force jedi to work with py3
 let g:jedi#force_py_version = 3
@@ -30,10 +35,6 @@ autocmd BufEnter * if expand('%:p') !~ '://' | :lcd %:p:h | endif
 " Ignore pyc files
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
-" Python syntax highlight
-let python_highlight_all = 1
-let python_no_operator_highlight = 1
-let g:python_highlight_class_vars = 1
 
 " DoxyGen-Syntax
 let g:load_doxygen_syntax = 1
@@ -54,9 +55,11 @@ endif
 " let g:ale_sign_warning = '❗'
 
 "Echoed message
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" which linter to enable for Python source file linting
+let g:neomake_python_enabled_makers = ['pylint']
 
 "Linters
 " let g:ale_linters = {

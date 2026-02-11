@@ -19,14 +19,10 @@ Plug 'joshdick/onedark.vim'
 " For onedark colorscheme
 Plug 'sheerun/vim-polyglot'
 
-" For asynchrnous  calls?
+" For asynchronous calls
 Plug 'neomake/neomake'
 
-" Install vim dev-icons
-Plug 'ryanoasis/vim-devicons'
-
-
-" Vim- jupyter
+" Vim-jupyter
 Plug 'szymonmaszke/vimpyter' "vim-plug
 
 
@@ -68,7 +64,6 @@ Plug 'fisadev/fisa-vim-colorscheme'
 
 " Surround
 Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch.vim'
 Plug 'tpope/vim-surround'
 
 " Autoclose
@@ -93,7 +88,7 @@ Plug 'w0rp/ale'
 Plug 'myusuf3/numbers.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'  " File icons for NERDTree, airline, etc.
 
 " Jedi Vim Python 
 " Plug 'davidhalter/jedi-vim'
@@ -158,16 +153,11 @@ endif
 
 let g:deoplete#enable_at_startup = 1
 
+" Mouse support for vim (neovim doesn't need this)
 if !has('nvim')
     set ttymouse=xterm2
 endif
 
-if has('nvim')
-   tnoremap <Esc> <C-\><C-n>
-endif
-
-if exists(':tnoremap')
-     tnoremap <Esc> <C-\><C-n>
-endif
+" Terminal mappings are now handled in ~/.config/nvim/init.vim for neovim
 
 call plug#end()

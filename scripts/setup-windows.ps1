@@ -87,17 +87,17 @@ function Install-WithWinget {
     Write-Ok "$name installed"
 }
 
-function Add-VimToPath {
-    $vimExe = Get-ChildItem "C:\Program Files\Vim" -Recurse -Filter "vim.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
-    if (-not $vimExe) { Write-Warn "vim.exe not found under C:\Program Files\Vim — PATH not updated."; return }
-    $vimDir = $vimExe.DirectoryName
+function Add-NeovimToPath {
+    $nvimExe = Get-ChildItem "C:\Program Files\Neovim" -Recurse -Filter "nvim.exe" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $nvimExe) { Write-Warn "nvim.exe not found under C:\Program Files\Neovim — PATH not updated."; return }
+    $nvimDir = $nvimExe.DirectoryName
     $userPath = [System.Environment]::GetEnvironmentVariable("PATH", "User")
-    if ($userPath -notlike "*$vimDir*") {
-        [System.Environment]::SetEnvironmentVariable("PATH", "$userPath;$vimDir", "User")
-        $env:PATH += ";$vimDir"
-        Write-Ok "Added $vimDir to user PATH"
+    if ($userPath -notlike "*$nvimDir*") {
+        [System.Environment]::SetEnvironmentVariable("PATH", "$userPath;$nvimDir", "User")
+        $env:PATH += ";$nvimDir"
+        Write-Ok "Added $nvimDir to user PATH"
     } else {
-        Write-Ok "$vimDir already in PATH"
+        Write-Ok "$nvimDir already in PATH"
     }
 }
 
@@ -113,7 +113,7 @@ function Install-Dependencies {
         return
     }
 
-    if (-not (Check-Neovim))   { Install-WithWinget "Neovim.Neovim"           "Neovim"   }
+    if (-not (Check-Neovim))   { Install-WithWinget "Neovim.Neovim" "Neovim"; Add-NeovimToPath }
     if (-not (Check-OhMyPosh)) { Install-WithWinget "JanDeDobbeleer.OhMyPosh" "OhMyPosh" }
 }
 

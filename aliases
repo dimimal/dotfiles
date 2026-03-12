@@ -1,4 +1,9 @@
 alias tmux="TERM=screen-256color-bce tmux"
 
+# Use neovim as vim if neovim is installed
+if command -v nvim >/dev/null 2>&1; then
+    alias vim='nvim'
+fi
+
 # tizonia
 alias yt-mix="tizonia --youtube-audio-mix-search"

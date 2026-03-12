@@ -13,8 +13,24 @@ source $HOME/.vim/config/line.vimrc
 " Neovim-specific settings
 " ============================================================================
 
-" Python provider settings
-let g:python3_host_prog = '/usr/bin/python3'
+" Python provider — auto-detect across platforms
+if has('win32') || has('win64')
+    " Windows: prefer 'python3', fall back to 'python' / 'py'
+    if exepath('python3') !=# ''
+        let g:python3_host_prog = exepath('python3')
+    elseif exepath('python') !=# ''
+        let g:python3_host_prog = exepath('python')
+    elseif exepath('py') !=# ''
+        let g:python3_host_prog = exepath('py')
+    endif
+else
+    " Unix: prefer python3 in PATH, fall back to common location
+    if exepath('python3') !=# ''
+        let g:python3_host_prog = exepath('python3')
+    else
+        let g:python3_host_prog = '/usr/bin/python3'
+    endif
+endif
 
 " Terminal settings
 " ESC to exit terminal mode
@@ -65,13 +81,16 @@ set signcolumn=yes
 set splitbelow
 set splitright
 
-" Persistent undo
+" Persistent undo — resolve path per platform
 if has('persistent_undo')
-    set undodir=$HOME/.config/nvim/undo
+    if has('win32') || has('win64')
+        let s:undodir = expand('$LOCALAPPDATA/nvim/undo')
+    else
+        let s:undodir = expand('$HOME/.config/nvim/undo')
+    endif
+    if !isdirectory(s:undodir)
+        call mkdir(s:undodir, 'p', 0700)
+    endif
+    let &undodir = s:undodir
     set undofile
-endif
-
-" Create undo directory if it doesn't exist
-if !isdirectory($HOME.'/.config/nvim/undo')
-    call mkdir($HOME.'/.config/nvim/undo', 'p', 0700)
 endif

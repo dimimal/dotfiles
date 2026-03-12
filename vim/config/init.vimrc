@@ -55,9 +55,11 @@ Plug 'fisadev/vim-isort'
 " Drag visual blocks arround
 Plug 'fisadev/dragvisuals.vim'
 
-" Tmux
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux'
+" Tmux integration — Unix only (tmux not available on Windows)
+if !has('win32') && !has('win64')
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tmux-plugins/vim-tmux'
+endif
 
 " Terminal Vim with 256 colors colorscheme
 Plug 'fisadev/fisa-vim-colorscheme'
@@ -145,7 +147,10 @@ if has('nvim')
     Plug 'zchee/deoplete-jedi', { 'for' : 'python'}
     Plug 'Shougo/neoinclude.vim'
     Plug 'Shougo/echodoc.vim'
-    Plug 'zchee/deoplete-zsh', { 'for' : 'zsh'}
+    " zsh completion — Unix only
+    if !has('win32') && !has('win64')
+        Plug 'zchee/deoplete-zsh', { 'for' : 'zsh'}
+    endif
     Plug 'zchee/deoplete-clang', { 'for' : ['c','cpp']}
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
